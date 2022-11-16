@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FitnessAppDemo.BLL.Configurations;
+using FitnessAppDemo.BLL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitnessAppDemo.BLL
 {
@@ -8,6 +10,18 @@ namespace FitnessAppDemo.BLL
             : base(options)
         {
             Database.EnsureCreated();
+        }
+
+        public DbSet<TreatingTypeDb> TreatingTypes { get; set; }
+
+        // Override OnModelCreating of DbContext for Custom Model Configuration
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new TreatingTypeConfiguration());
+
+            modelBuilder.SeedData(); // add default data
         }
 
         // MOVE TO PROGRAM
