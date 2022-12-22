@@ -1,4 +1,4 @@
-﻿using FitnessAppDemo.BLL.Models;
+﻿using FitnessAppDemo.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FitnessAppDemo.BLL
+namespace FitnessAppDemo.Data
 {
     internal static class ModelBuilderExtension
     {
@@ -24,22 +24,6 @@ namespace FitnessAppDemo.BLL
                     {
                         Id = 2,
                         Title = "fried"
-                    }
-                );
-
-            modelBuilder.Entity<ProductDb>()
-                .HasData(
-                    new ProductDb
-                    {
-                        Id = 1,
-                        Title = "Banana",
-                        TreatingTypeId = 1
-                    },
-                    new ProductDb
-                    {
-                        Id = 2,
-                        Title = "Banana",
-                        TreatingTypeId = 2
                     }
                 );
         }

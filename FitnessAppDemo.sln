@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessAppDemo.BLL", "FitnessAppDemo.BLL\FitnessAppDemo.BLL.csproj", "{9D269C57-C0AE-4208-A3A7-45D5DBBD0A96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessAppDemo.Data", "FitnessAppDemo.BLL\FitnessAppDemo.Data.csproj", "{9D269C57-C0AE-4208-A3A7-45D5DBBD0A96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessAppDemo.Web", "FitnessAppDemo.Web\FitnessAppDemo.Web.csproj", "{F1DC783A-C977-477A-8656-52FB8E51C814}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessAppDemo.Web", "FitnessAppDemo.Web\FitnessAppDemo.Web.csproj", "{F1DC783A-C977-477A-8656-52FB8E51C814}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessAppDemo.DAL", "FitnessAppDemo.DAL\FitnessAppDemo.DAL.csproj", "{6300BEE3-5722-45FB-A242-3F64D98BD350}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessAppDemo.Logic", "FitnessAppDemo.DAL\FitnessAppDemo.Logic.csproj", "{6300BEE3-5722-45FB-A242-3F64D98BD350}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessAppDemo.Tests", "FitnessAppDemo.Tests\FitnessAppDemo.Tests.csproj", "{B9EB6F9E-D439-4DC8-919C-DCFA57B1C531}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{6300BEE3-5722-45FB-A242-3F64D98BD350}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6300BEE3-5722-45FB-A242-3F64D98BD350}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6300BEE3-5722-45FB-A242-3F64D98BD350}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9EB6F9E-D439-4DC8-919C-DCFA57B1C531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9EB6F9E-D439-4DC8-919C-DCFA57B1C531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9EB6F9E-D439-4DC8-919C-DCFA57B1C531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9EB6F9E-D439-4DC8-919C-DCFA57B1C531}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

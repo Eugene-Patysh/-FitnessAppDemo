@@ -1,8 +1,8 @@
-﻿using FitnessAppDemo.BLL.Models;
+﻿using FitnessAppDemo.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FitnessAppDemo.BLL.Configurations
+namespace FitnessAppDemo.Data.Configurations
 {
     internal class ProductConfiguration : IEntityTypeConfiguration<ProductDb>
     {
@@ -10,8 +10,8 @@ namespace FitnessAppDemo.BLL.Configurations
         {
             builder.ToTable("Products").HasKey(t => t.Id); // configure table name and set primary key
             builder.Property(_ => _.Id).ValueGeneratedOnAdd(); // auto creating id when entity is added
-            builder.Property(_ => _.Title).IsRequired().HasMaxLength(30);
-            builder.HasOne(_ => _.TreatingType).WithMany(_ => _.Products).HasForeignKey(_ => _.TreatingTypeId);
+            builder.Property(_ => _.Title).IsRequired().HasMaxLength(30); // required field with 30 symbols max length
+            builder.HasOne(_ => _.ProductSubCategory).WithMany(_ => _.Products).HasForeignKey(_ => _.ProductSubCategoryId); // set foreign key
         }
     }
 }
