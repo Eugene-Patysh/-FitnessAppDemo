@@ -1,4 +1,5 @@
 ﻿using FitnessAppDemo.Data;
+using FitnessAppDemo.Logic.ApiModels;
 using FitnessAppDemo.Logic.Builders;
 using FitnessAppDemo.Logic.Models;
 using FluentValidation;
@@ -13,6 +14,34 @@ namespace FitnessAppDemo.Logic.Services
         public ProductCategoryService(ProductContext context, IValidator<ProductCategoryDto> validator) : base(context)
         {
             _validator = validator;
+        }
+
+        public async Task<PaginationResponse<ProductCategoryDto>> GetPagination(PaginationRequest request)
+        {
+            var query = _context.ProductCategories.AsQueryable();
+
+            if (!string.IsNullOrEmpty(request.Query))
+            {
+                query = query.Where(c => c.Title.Contains(request.Query, StringComparison.OrdinalIgnoreCase));
+            }
+            
+            if (!string.IsNullOrEmpty(request.SortBy))
+            {
+                switch (request.SortBy)
+                {
+                    case "title": query = request.Asc ? query.OrderBy(c => c.Title) : query.OrderByDescending(c => c.Title); break;
+                }
+            }
+            var categoryDbs = await query.ToArrayAsync().ConfigureAwait(false);
+
+            var total = categoryDbs.Length;
+            var categoryDtos = ProductCategoryBuilder.Build(categoryDbs.Skip(request.Skip ?? 0).Take(request.Take ?? 10))?.ToArray();
+
+            return new PaginationResponse<ProductCategoryDto>
+            {
+                Total = total,
+                Values = categoryDtos
+            };
         }
 
         public async Task<ProductCategoryDto[]> GetAllAsync()
