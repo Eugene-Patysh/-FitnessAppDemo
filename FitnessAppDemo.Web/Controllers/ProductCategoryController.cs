@@ -27,6 +27,7 @@ namespace FitnessAppDemo.Web.Controllers
         [HttpGet("{productCategoryId}")]
         public async Task<ActionResult<ProductCategoryDto>> GetByIdAsync(int? productCategoryId)
         {
+            //throw new ValidationException(_sharedLocalizer["BadRequest"]);
             if (productCategoryId == null)
                 BadRequest();
 
@@ -51,9 +52,10 @@ namespace FitnessAppDemo.Web.Controllers
         [SwaggerRequestExample(typeof(ProductCategoryDto), typeof(ProductCategoryCreateExample))]
         public async Task CreateAsync([FromBody] ProductCategoryDto productCategory)
         {
+
             if (!ModelState.IsValid)
                 BadRequest(ModelState);
-            // throw new ValidationException(_sharedLocalizer["BadRequest"]);
+            //throw new ValidationException(_sharedLocalizer["BadRequest"]);
             await _productCategoryService.CreateAsync(productCategory);
         }
 

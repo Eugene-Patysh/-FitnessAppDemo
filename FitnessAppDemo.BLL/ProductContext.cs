@@ -9,7 +9,7 @@ namespace FitnessAppDemo.Data
         public ProductContext(DbContextOptions<ProductContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         public DbSet<TreatingTypeDb> TreatingTypes { get; set; }

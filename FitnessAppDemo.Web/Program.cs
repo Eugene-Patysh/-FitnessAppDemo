@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Localization: Here we are adding in the localizaton service which will enable using IStringLocalizer in the CustomersController
-//builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
 SwaggerConfiguration.Configure(builder);
 
@@ -30,15 +30,19 @@ ServicesConfiguration.Configure(builder);
 
 var app = builder.Build();
 
-//var supportedCultures = new[] { "en-US", "ru-RU" };
-//var localizationOptions =
-//    new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
-//    .AddSupportedCultures(supportedCultures)
-//    .AddSupportedUICultures(supportedCultures);
+var supportedCultures = new[] { "en-US", "ru-RU" };
+var localizationOptions =
+    new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
 
-//app.UseRequestLocalization(localizationOptions);
+app.UseRequestLocalization(localizationOptions);
 
 SwaggerConfiguration.UseSwagger(app);
+
+app.UseHttpsRedirection();
+
+app.MapControllers();
 
 app.MapGet("/", () => "Hello World!");
 
