@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Localization: Here we are adding in the localizaton service which will enable using IStringLocalizer in the CustomersController
-builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddLocalization(options => options.ResourcesPath = "FitnessAppDemo.Localization.Resources");
 
 SwaggerConfiguration.Configure(builder);
 

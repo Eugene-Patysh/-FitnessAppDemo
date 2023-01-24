@@ -4,16 +4,19 @@ using FitnessAppDemo.Logic.Builders;
 using FitnessAppDemo.Logic.Models;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace FitnessAppDemo.Logic.Services
 {
     public class ProductCategoryService : BaseService, IProductCategoryService
     {
         private readonly IValidator<ProductCategoryDto> _validator;
+        private readonly IStringLocalizer<SharedResource> _localizer;
 
-        public ProductCategoryService(ProductContext context, IValidator<ProductCategoryDto> validator) : base(context)
+        public ProductCategoryService(ProductContext context, IValidator<ProductCategoryDto> validator, IStringLocalizer<SharedResource> localizer) : base(context)
         {
             _validator = validator;
+            _localizer = localizer;
         }
 
         public async Task<PaginationResponse<ProductCategoryDto>> GetPagination(PaginationRequest request)
@@ -53,6 +56,7 @@ namespace FitnessAppDemo.Logic.Services
 
         public async Task<ProductCategoryDto> GetByIdAsync(int? productCategoryDtoId)
         {
+            //throw new ValidationException(_localizer["BadRequest"]);
             if (productCategoryDtoId == null)
             {
                 throw new ValidationException("Product Category Id can't be null.");

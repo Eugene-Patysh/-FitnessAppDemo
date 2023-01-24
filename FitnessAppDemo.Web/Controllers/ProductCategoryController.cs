@@ -1,4 +1,5 @@
-﻿using FitnessAppDemo.Logic.Models;
+﻿using FitnessAppDemo.Logic;
+using FitnessAppDemo.Logic.Models;
 using FitnessAppDemo.Logic.Services;
 using FitnessAppDemo.Web.SwaggerExamples;
 using FluentValidation;
@@ -27,7 +28,8 @@ namespace FitnessAppDemo.Web.Controllers
         [HttpGet("{productCategoryId}")]
         public async Task<ActionResult<ProductCategoryDto>> GetByIdAsync(int? productCategoryId)
         {
-            //throw new ValidationException(_sharedLocalizer["BadRequest"]);
+            //throw new ValidationException(String.Format(_sharedLocalizer["BadRequest"]));
+
             if (productCategoryId == null)
                 BadRequest();
 
