@@ -1,4 +1,6 @@
-﻿using FitnessAppDemo.Logic;
+﻿using EventBus.Base.Standard;
+using FitnessAppDemo.Logging.Events;
+using FitnessAppDemo.Logic;
 using FitnessAppDemo.Logic.Models;
 using FitnessAppDemo.Logic.Services;
 using FitnessAppDemo.Web.SwaggerExamples;
@@ -16,13 +18,16 @@ namespace FitnessAppDemo.Web.Controllers
         private readonly IProductCategoryService _productCategoryService;
         private readonly IStringLocalizer<ProductCategoryController> _localizer;
         private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
+        private readonly IEventBus _eventBus;
         public ProductCategoryController(IProductCategoryService productCategoryService,
                                         IStringLocalizer<ProductCategoryController> localizer,
-                                        IStringLocalizer<SharedResource> sharedLocalizer)
+                                        IStringLocalizer<SharedResource> sharedLocalizer,
+                                        IEventBus eventBus)
         {
             _productCategoryService = productCategoryService;
             _localizer = localizer;
             _sharedLocalizer = sharedLocalizer;
+            _eventBus = eventBus;
         }
 
         [HttpGet("{productCategoryId}")]
@@ -59,6 +64,7 @@ namespace FitnessAppDemo.Web.Controllers
                 BadRequest(ModelState);
             //throw new ValidationException(_sharedLocalizer["BadRequest"]);
             await _productCategoryService.CreateAsync(productCategory);
+            _eventBus.Publish(new LogEvent("Creating", "Product Category Created"));
         }
 
         /// <summary>

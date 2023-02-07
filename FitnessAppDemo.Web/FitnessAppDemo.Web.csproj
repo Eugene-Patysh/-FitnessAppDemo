@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EventBus.RabbitMQ.Standard" Version="3.1.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.6" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.4.0" />
@@ -19,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FitnessAppDemo.BLL\FitnessAppDemo.Data.csproj" />
     <ProjectReference Include="..\FitnessAppDemo.DAL\FitnessAppDemo.Logic.csproj" />
+    <ProjectReference Include="..\FitnessAppDemo.Logging\FitnessAppDemo.Logging.csproj" />
   </ItemGroup>
 
 </Project>

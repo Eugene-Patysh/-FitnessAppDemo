@@ -17,9 +17,9 @@ namespace FitnessAppDemo.Tests.Services
 
         public ProductCategoryServiceTests()
         {
-            var dbContext = CreateDbContext();
-            _validator = new ProductCategoryValidator();
-            _productCategoryService = new ProductCategoryService(dbContext, _validator);
+            //var dbContext = CreateDbContext();
+            //_validator = new ProductCategoryValidator();
+            //_productCategoryService = new ProductCategoryService(dbContext, _validator);
         }
 
         private ProductContext CreateDbContext()
