@@ -10,4 +10,8 @@
     <PackageReference Include="EventBus.RabbitMQ.Standard" Version="3.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FitnessAppDemo.BLL\FitnessAppDemo.Data.csproj" />
+  </ItemGroup>
+
 </Project>

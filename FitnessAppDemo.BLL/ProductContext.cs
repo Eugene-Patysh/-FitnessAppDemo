@@ -19,6 +19,7 @@ namespace FitnessAppDemo.Data
         public DbSet<NutrientCategoryDb> NutrientCategories { get; set; }
         public DbSet<NutrientDb> Nutrients { get; set; }
         public DbSet<ProductNutrientDb> ProductNutrients { get; set; }
+        public DbSet<Log> Logs { get; set; }
 
         // Override OnModelCreating of DbContext for Custom Model Configuration
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,4 +1,5 @@
-﻿using FitnessAppDemo.Logic.Models;
+﻿using FitnessAppDemo.Logging.Services;
+using FitnessAppDemo.Logic.Models;
 using FitnessAppDemo.Logic.Services;
 using FitnessAppDemo.Logic.Validators;
 using FluentValidation;
@@ -11,6 +12,7 @@ namespace FitnessAppDemo.Web.Configurations
         {
             builder.Services.AddTransient<IValidator<ProductCategoryDto>, ProductCategoryValidator>();
             builder.Services.AddTransient<IProductCategoryService, ProductCategoryService>();
+            builder.Services.AddTransient<LogService>();
         }
     }
 }

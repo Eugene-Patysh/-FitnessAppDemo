@@ -1,6 +1,9 @@
+using EventBus.Base.Standard;
 using EventBus.RabbitMQ.Standard.Configuration;
 using EventBus.RabbitMQ.Standard.Options;
 using FitnessAppDemo.Data;
+using FitnessAppDemo.Logging.Events;
+using FitnessAppDemo.Logging.Services;
 using FitnessAppDemo.Logic.Models;
 using FitnessAppDemo.Logic.Services;
 using FitnessAppDemo.Logic.Validators;
@@ -37,6 +40,10 @@ builder.Services.AddRabbitMqConnection(rabbitMqOptions);
 builder.Services.AddRabbitMqRegistration(rabbitMqOptions);
 
 var app = builder.Build();
+
+// TODO: move to Logging project
+var eventBus = app.Services.GetRequiredService<IEventBus>();
+eventBus.Subscribe<LogEvent, LogService>();
 
 var supportedCultures = new[] { "en-US", "ru-RU" };
 var localizationOptions =
