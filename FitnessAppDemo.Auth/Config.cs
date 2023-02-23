@@ -13,8 +13,15 @@ namespace FitnessAppDemo.Auth
                 new ApiResource("fitnessApp", "Fitness App")
             };
 
+        public static IEnumerable<IdentityResource> GetIdentityResources() =>
+            new IdentityResource[]
+            {
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile(),
+            };
+
         public static IEnumerable<ApiScope> GetApiScopes() =>
-            new List<ApiScope> { new ApiScope("companyApi", "CompanyEmployee API") };
+            new List<ApiScope> { new ApiScope("fitnessApi", "Fitness Web API") };
 
         public static IEnumerable<Client> GetClients() =>
             new List<Client>
@@ -24,8 +31,9 @@ namespace FitnessAppDemo.Auth
                     ClientId = "fitnessApp",
                     ClientSecrets = new [] { new Secret("fitSecret".Sha512()) },
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
-                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId, "companyApi" }
-                 }
+                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId, "fitnessApi" },
+                    AllowAccessTokensViaBrowser = true,
+                }
             };
 
         public static List<TestUser> GetTestUsers()

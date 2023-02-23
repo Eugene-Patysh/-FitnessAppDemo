@@ -14,18 +14,18 @@ builder.Services.AddDbContext<UserContext>(options => {
 builder.Services.AddIdentityServer()
     .AddInMemoryApiScopes(Config.GetApiScopes())
     .AddInMemoryApiResources(Config.GetApiResources())
-    //.AddInMemoryIdentityResources(Config.GetIdentityResources())
+    .AddInMemoryIdentityResources(Config.GetIdentityResources())
     .AddTestUsers(Config.GetTestUsers())
     .AddInMemoryClients(Config.GetClients());
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+//app.UseHttpsRedirection();
+//app.UseStaticFiles();
 app.UseRouting();
 
 app.UseIdentityServer();
-app.UseAuthentication();
+//app.UseAuthentication();
 //app.UseAuthorization();
 
 
