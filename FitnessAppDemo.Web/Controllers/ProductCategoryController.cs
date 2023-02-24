@@ -5,6 +5,7 @@ using FitnessAppDemo.Logic.Models;
 using FitnessAppDemo.Logic.Services;
 using FitnessAppDemo.Web.SwaggerExamples;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Swashbuckle.AspNetCore.Filters;
@@ -18,29 +19,31 @@ namespace FitnessAppDemo.Web.Controllers
         private readonly IProductCategoryService _productCategoryService;
         private readonly IStringLocalizer<ProductCategoryController> _localizer;
         private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
-        private readonly IEventBus _eventBus;
+        //private readonly IEventBus _eventBus;
         public ProductCategoryController(IProductCategoryService productCategoryService,
                                         IStringLocalizer<ProductCategoryController> localizer,
-                                        IStringLocalizer<SharedResource> sharedLocalizer,
-                                        IEventBus eventBus)
+                                        IStringLocalizer<SharedResource> sharedLocalizer)
+                                        //IEventBus eventBus)
         {
             _productCategoryService = productCategoryService;
             _localizer = localizer;
             _sharedLocalizer = sharedLocalizer;
-            _eventBus = eventBus;
+            //_eventBus = eventBus;
         }
 
+        [Authorize]
         [HttpGet("{productCategoryId}")]
         public async Task<ActionResult<ProductCategoryDto>> GetByIdAsync(int? productCategoryId)
         {
             //throw new ValidationException(String.Format(_sharedLocalizer["BadRequest"]));
 
-            if (productCategoryId == null)
-                BadRequest();
+            return Ok(new ProductCategoryDto() { Title = "Test" });
+            //if (productCategoryId == null)
+            //    BadRequest();
 
-            var productCategory = await _productCategoryService.GetByIdAsync(productCategoryId);
+            //var productCategory = await _productCategoryService.GetByIdAsync(productCategoryId);
 
-            return productCategory == null ? NotFound() : Ok(productCategory);
+            //return productCategory == null ? NotFound() : Ok(productCategory);
         }
 
         /// <summary>
@@ -64,7 +67,7 @@ namespace FitnessAppDemo.Web.Controllers
                 BadRequest(ModelState);
             //throw new ValidationException(_sharedLocalizer["BadRequest"]);
             await _productCategoryService.CreateAsync(productCategory);
-            _eventBus.Publish(new LogEvent("Creating", "Product Category Created"));
+            //_eventBus.Publish(new LogEvent("Creating", "Product Category Created"));
         }
 
         /// <summary>

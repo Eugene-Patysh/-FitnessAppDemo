@@ -9,7 +9,9 @@ using FitnessAppDemo.Logic.Services;
 using FitnessAppDemo.Logic.Validators;
 using FitnessAppDemo.Web.Configurations;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
@@ -36,14 +38,25 @@ builder.Services.AddDbContext<ProductContext>(options => {
 // Services dependency injection 
 ServicesConfiguration.Configure(builder);
 
-builder.Services.AddRabbitMqConnection(rabbitMqOptions);
-builder.Services.AddRabbitMqRegistration(rabbitMqOptions);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+	.AddJwtBearer(options =>
+	{
+		options.Authority = "https://localhost:7241";
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateAudience = false
+        };
+    });
+
+//builder.Services.AddRabbitMqConnection(rabbitMqOptions);
+//builder.Services.AddRabbitMqRegistration(rabbitMqOptions);
 
 var app = builder.Build();
 
 // TODO: move to Logging project
-var eventBus = app.Services.GetRequiredService<IEventBus>();
-eventBus.Subscribe<LogEvent, LogService>();
+//var eventBus = app.Services.GetRequiredService<IEventBus>();
+//eventBus.Subscribe<LogEvent, LogService>();
 
 var supportedCultures = new[] { "en-US", "ru-RU" };
 var localizationOptions =
@@ -58,6 +71,9 @@ SwaggerConfiguration.UseSwagger(app);
 app.UseHttpsRedirection();
 
 app.MapControllers();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapGet("/", () => "Hello World!");
 
